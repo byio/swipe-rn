@@ -16,10 +16,28 @@ const DATA = [
 ];
 
 export default class App extends React.Component {
+  // helper methods
+    /*
+      the renderCard method will be called for each item
+      in the data array. it'll be passed into the Deck
+      component with the DATA array above, where the data
+      will be mapped over, and the renderCard method will
+      be invoked with each item.
+    */
+  renderCard (item) {
+    return (
+      <Text>{item.text}</Text>
+    );
+  }
+
+  // render method
   render() {
     return (
       <View style={styles.container}>
-        <Deck />
+        <Deck
+          data={DATA}
+          renderCard={this.renderCard}
+        />
       </View>
     );
   }

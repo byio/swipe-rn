@@ -5,9 +5,19 @@ class Ball extends Component {
   // render method
   render () {
     return (
-      <View />
+      <View style={styles.ball}/>
     );
   }
 }
+
+const styles = {
+  ball: {
+    height: 60,
+    width: 60,
+    borderRadius: 30,
+    borderWidth: 30,
+    borderColor: 'black'
+  }
+};
 
 export default Ball;

@@ -1,11 +1,21 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { Animated, View } from 'react-native';
 
 class Ball extends Component {
+  // lifecycle methods
+  componentWillMount () {
+    this.position = new Animated.ValueXY(0, 0);
+    Animated.spring(this.position, {
+      toValue: { x: 20, y: 50 }
+    }).start();
+  }
+
   // render method
   render () {
     return (
-      <View style={styles.ball}/>
+      <Animated.View style={this.position.getLayout()}>
+        <View style={styles.ball}/>
+      </Animated.View>
     );
   }
 }

@@ -16,7 +16,9 @@ class Deck extends Component {
   // render method
   render () {
     return (
-      <View />
+      <View>
+        {this.renderCards()}
+      </View>
     );
   }
 }

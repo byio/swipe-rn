@@ -29,6 +29,7 @@ class Deck extends Component {
       if (index === 0) {
         return (
           <Animated.View
+            key={item.id}
             style={this.position.getLayout()}
             {...this._panResponder.panHandlers}
           >

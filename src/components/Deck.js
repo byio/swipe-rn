@@ -24,8 +24,15 @@ class Deck extends Component {
       each Animated.View component
     */
   getCardStyle () {
+    // set up rotation using .interpolate()
+    const rotate = this.position.x.interpolate({
+      inputRange: [-500, 0, 500],
+      outputRange: ['-120deg', '0deg', '120deg']
+    });
+
     return {
-      ...this.position.getLayout()
+      ...this.position.getLayout(),
+      transform: [{ rotate }]
     };
   }
     /*

@@ -24,7 +24,18 @@ class Deck extends Component {
       renderCard props
     */
   renderCards () {
-    return this.props.data.map (item => {
+    return this.props.data.map ((item, index) => {
+      // check that card is first in deck, and animate
+      if (index === 0) {
+        return (
+          <Animated.View
+            style={this.position.getLayout()}
+            {...this._panResponder.panHandlers}
+          >
+            {this.props.renderCard(item)}
+          </Animated.View>
+        );
+      }
       return this.props.renderCard(item);
     });
   }
@@ -32,12 +43,9 @@ class Deck extends Component {
   // render method
   render () {
     return (
-      <Animated.View
-        style={this.position.getLayout()}
-        {...this._panResponder.panHandlers}
-      >
+      <View>
         {this.renderCards()}
-      </Animated.View>
+      </View>
     );
   }
 }

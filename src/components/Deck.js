@@ -1,7 +1,23 @@
 import React, { Component } from 'react';
-import { Animated, View } from 'react-native';
+import { Animated, View, PanResponder } from 'react-native';
 
 class Deck extends Component {
+  // lifecycle methods
+  componentWillMount () {
+    // init new animation
+    this.position = new Animated.ValueXY();
+    // pan responder handlers
+    this._panResponder = PanResponder.create({
+      onStartShouldSetPanResponder: (event, gesture) => true,
+      onPanResponderMove: (event, gesture) => {
+        this.position.setValue({ x: gesture.dx, y: gesture.dy })
+      },
+      onPanResponderRelease: (event, gesture) => {
+
+      }
+    })
+  }
+
   // helper methods
     /*
       the renderCards method will receive data and
@@ -16,9 +32,12 @@ class Deck extends Component {
   // render method
   render () {
     return (
-      <View>
+      <Animated.View
+        style={this.position.getLayout()}
+        {...this._panResponder.panHandlers}
+      >
         {this.renderCards()}
-      </View>
+      </Animated.View>
     );
   }
 }

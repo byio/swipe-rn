@@ -20,6 +20,15 @@ class Deck extends Component {
 
   // helper methods
     /*
+      the getCardStyle method returns the style object for
+      each Animated.View component
+    */
+  getCardStyle () {
+    return {
+      ...this.position.getLayout()
+    };
+  }
+    /*
       the renderCards method will receive data and
       renderCard props
     */
@@ -30,7 +39,7 @@ class Deck extends Component {
         return (
           <Animated.View
             key={item.id}
-            style={this.position.getLayout()}
+            style={this.getCardStyle()}
             {...this._panResponder.panHandlers}
           >
             {this.props.renderCard(item)}

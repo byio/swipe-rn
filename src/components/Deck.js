@@ -16,12 +16,18 @@ class Deck extends Component {
         this.position.setValue({ x: gesture.dx, y: gesture.dy })
       },
       onPanResponderRelease: (event, gesture) => {
-
+        this.resetPosition();
       }
     })
   }
 
   // helper methods
+    // resets card position when gesture ends
+  resetPosition () {
+    Animated.spring(this.position, {
+      toValue: { x: 0, y: 0 }
+    }).start();
+  }
     /*
       the getCardStyle method returns the style object for
       each Animated.View component

@@ -114,7 +114,7 @@ class Deck extends Component {
           {this.props.renderCard(item)}
         </View>
       );
-    });
+    }).reverse();
   }
 
   // render method

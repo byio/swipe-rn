@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Animated, View, PanResponder, Dimensions } from 'react-native';
+import { Animated, View, PanResponder, Dimensions, LayoutAnimation, UIManager } from 'react-native';
 
 // constants for hard-coded values
 const SCREEN_WIDTH = Dimensions.get('window').width;
@@ -36,6 +36,12 @@ class Deck extends Component {
         }
       }
     })
+  }
+
+  componentWillUpdate () {
+    // code required in android
+    UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);
+    LayoutAnimation.spring();
   }
 
   // helper methods

@@ -11,7 +11,7 @@ class Deck extends Component {
   constructor (props) {
     super(props);
     this.state = {
-      index: 0
+      cardIndex: 0
     };
   }
 
@@ -45,7 +45,15 @@ class Deck extends Component {
     Animated.timing(this.position, {
       toValue: { x, y: 0 },
       duration: SWIPE_OUT_DURATION
-    }).start();
+    }).start(() => {
+      this.onSwipeComplete(direction);
+    });
+  }
+    // callback function after cardExit animation
+  onSwipeComplete (direction) {
+    const { data } = this.props;
+    const item = data[this.state.cardIndex];
+    console.log(`${item.text} was swiped ${direction}.`);
   }
     // resets card position when gesture ends
   resetPosition () {

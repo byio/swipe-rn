@@ -7,6 +7,14 @@ const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.3;
 const SWIPE_OUT_DURATION = 250 // ms
 
 class Deck extends Component {
+  // constructor
+  constructor (props) {
+    super(props);
+    this.state = {
+      index: 0
+    };
+  }
+
   // lifecycle methods
   componentWillMount () {
     // init new animation

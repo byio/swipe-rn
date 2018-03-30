@@ -54,6 +54,10 @@ class Deck extends Component {
     const { data } = this.props;
     const item = data[this.state.cardIndex];
     console.log(`${item.text} was swiped ${direction}.`);
+    this.position.setValue({ x: 0, y: 0 });
+    this.setState({
+      cardIndex: this.state.cardIndex + 1
+    });
   }
     // resets card position when gesture ends
   resetPosition () {
@@ -82,9 +86,11 @@ class Deck extends Component {
       renderCard props
     */
   renderCards () {
-    return this.props.data.map ((item, index) => {
+    return this.props.data.map ((item, i) => {
+      // if card has been swiped do not render
+      if (i < this.state.cardIndex) return null;
       // check that card is first in deck, and animate
-      if (index === 0) {
+      if (i === this.state.cardIndex) {
         return (
           <Animated.View
             key={item.id}

@@ -19,9 +19,9 @@ class Deck extends Component {
       },
       onPanResponderRelease: (event, gesture) => {
         if (gesture.dx > SWIPE_THRESHOLD) {
-          this.cardExitRight();
+          this.cardExit('right');
         } else if (gesture.dx < -SWIPE_THRESHOLD) {
-          console.log('swiped left');
+          this.cardExit('left');
         } else {
           this.resetPosition();
         }
@@ -30,10 +30,12 @@ class Deck extends Component {
   }
 
   // helper methods
-    // card programmatically exits right side of screen
-  cardExitRight () {
+    // card programmatically exits specified side of screen
+  cardExit (direction) {
+    // if direction is right, x = SCREEN_WIDTH, otherwise, x = -SCREEN_WIDTH
+    const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH
     Animated.timing(this.position, {
-      toValue: { x: SCREEN_WIDTH + 100, y: 0 },
+      toValue: { x, y: 0 },
       duration: SWIPE_OUT_DURATION
     }).start();
   }

@@ -38,6 +38,18 @@ class Deck extends Component {
     })
   }
 
+  componentWillReceiveProps (nextProps) {
+    /*
+      check to see if the new set of props is identical to
+      the current set of props; reset index if different
+    */
+    if (nextProps.data !== this.props.data) {
+      this.setState({
+        cardIndex: 0
+      });
+    }
+  }
+
   componentWillUpdate () {
     // code required in android
     UIManager.setLayoutAnimationEnabledExperimental && UIManager.setLayoutAnimationEnabledExperimental(true);

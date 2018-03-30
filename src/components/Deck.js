@@ -8,6 +8,12 @@ const SWIPE_OUT_DURATION = 250; // ms
 const CASCADING_FACTOR = 1;
 
 class Deck extends Component {
+  // default props
+  static defaultProps = {
+    onSwipeRight: () => {},
+    onSwipeLeft: () => {}
+  }
+
   // constructor
   constructor (props) {
     super(props);
@@ -70,9 +76,12 @@ class Deck extends Component {
   }
     // callback function after cardExit animation
   onSwipeComplete (direction) {
-    const { data } = this.props;
+    const { onSwipeRight, onSwipeLeft, data } = this.props;
     const item = data[this.state.cardIndex];
     console.log(`${item.text} was swiped ${direction}.`);
+    // handling data returned from swiping left or right
+    direction === 'right' ? onSwipeRight(item) : onSwipeLeft(item);
+    // advance card stack
     this.position.setValue({ x: 0, y: 0 });
     this.setState({
       cardIndex: this.state.cardIndex + 1

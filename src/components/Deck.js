@@ -3,7 +3,7 @@ import { Animated, View, PanResponder, Dimensions } from 'react-native';
 
 // constants for hard-coded values
 const SCREEN_WIDTH = Dimensions.get('window').width;
-const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.6;
+const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.3;
 const SWIPE_OUT_DURATION = 250 // ms
 
 class Deck extends Component {
@@ -33,7 +33,7 @@ class Deck extends Component {
     // card programmatically exits specified side of screen
   cardExit (direction) {
     // if direction is right, x = SCREEN_WIDTH, otherwise, x = -SCREEN_WIDTH
-    const x = direction === 'right' ? SCREEN_WIDTH : -SCREEN_WIDTH
+    const x = direction === 'right' ? SCREEN_WIDTH * 1.2 : -SCREEN_WIDTH * 1.2
     Animated.timing(this.position, {
       toValue: { x, y: 0 },
       duration: SWIPE_OUT_DURATION

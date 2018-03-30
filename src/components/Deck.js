@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import { Animated, View, PanResponder, Dimensions } from 'react-native';
 
-// define screen widths
+// constants for hard-coded values
 const SCREEN_WIDTH = Dimensions.get('window').width;
-
-// define swipe threshold
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.6;
+const SWIPE_OUT_DURATION = 250 // ms
 
 class Deck extends Component {
   // lifecycle methods
@@ -20,7 +19,7 @@ class Deck extends Component {
       },
       onPanResponderRelease: (event, gesture) => {
         if (gesture.dx > SWIPE_THRESHOLD) {
-          console.log('swiped right!');
+          this.cardExitRight();
         } else if (gesture.dx < -SWIPE_THRESHOLD) {
           console.log('swiped left');
         } else {
@@ -31,6 +30,13 @@ class Deck extends Component {
   }
 
   // helper methods
+    // card programmatically exits right side of screen
+  cardExitRight () {
+    Animated.timing(this.position, {
+      toValue: { x: SCREEN_WIDTH + 100, y: 0 },
+      duration: SWIPE_OUT_DURATION
+    }).start();
+  }
     // resets card position when gesture ends
   resetPosition () {
     Animated.spring(this.position, {

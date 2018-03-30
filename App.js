@@ -44,6 +44,14 @@ export default class App extends React.Component {
     );
   }
 
+  renderNoMoreCards () {
+    return (
+      <Card>
+        <Text>That's all folks!</Text>
+      </Card>
+    );
+  }
+
   // render method
   render() {
     return (
@@ -51,6 +59,7 @@ export default class App extends React.Component {
         <Deck
           data={DATA}
           renderCard={this.renderCard}
+          renderNoMoreCards={this.renderNoMoreCards}
         />
       </View>
     );

@@ -86,6 +86,11 @@ class Deck extends Component {
       renderCard props
     */
   renderCards () {
+    // if all cards have been swiped
+    if (this.state.cardIndex >= this.props.data.length) {
+      return this.props.renderNoMoreCards();
+    }
+    // if there are un-swiped cards in data array
     return this.props.data.map ((item, i) => {
       // if card has been swiped do not render
       if (i < this.state.cardIndex) return null;

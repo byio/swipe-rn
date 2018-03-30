@@ -4,7 +4,8 @@ import { Animated, View, PanResponder, Dimensions } from 'react-native';
 // constants for hard-coded values
 const SCREEN_WIDTH = Dimensions.get('window').width;
 const SWIPE_THRESHOLD = SCREEN_WIDTH * 0.3;
-const SWIPE_OUT_DURATION = 250 // ms
+const SWIPE_OUT_DURATION = 250; // ms
+const CASCADING_FACTOR = 1;
 
 class Deck extends Component {
   // constructor
@@ -109,7 +110,7 @@ class Deck extends Component {
       return (
         <Animated.View
           key={item.id}
-          style={[ styles.cardStyle, { top: 10 * (i - this.state.cardIndex) } ]}
+          style={[ styles.cardStyle, { top: CASCADING_FACTOR * (i - this.state.cardIndex) } ]}
         >
           {this.props.renderCard(item)}
         </Animated.View>
